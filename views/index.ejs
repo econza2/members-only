@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <ul>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Log In</a></li>
+    </ul>
+
+    <ul>
+      <% if(locals.allMessages){allMessages.forEach((message) =>{%>
+      <li>
+        <%= message.title%> <%=message.timestamp%> <%=message.message_text%>
+      </li>
+      <%}) }%>
+    </ul>
+  </body>
+</html>

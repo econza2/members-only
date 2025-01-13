@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Successful Login</title>
+  </head>
+  <body>
+    <h1>You have successfully logged in</h1>
+    <h2>Welcome <%= currentUser.username%></h2>
+    <h3>Member? <%=isMember%></h3>
+    <h3>Admin? <%=isAdmin%></h3>
+    <ul>
+      <li><a href="/create-message">Create Message</a></li>
+      <li><a href="/become-member">Become Member</a></li>
+      <li><a href="/become-admin">Become Admin</a></li>
+      <li><a href="/logout">Log Out</a></li>
+    </ul>
+
+    <ul>
+      <%if(isMember === false && isAdmin === false){
+      allMessages.forEach((message) =>{%>
+      <li>
+        MEMBER: FALSE ADMIN: FALSE Message Title: <%=message.title%> Message
+        Posted Time: <%= message.timestamp%> Message: <%= message.message_text%>
+      </li>
+      <%})}else if(isMember === true && isAdmin ===
+      false){allMessages.forEach((message) =>{%>
+      <li>
+        MEMBER: TRUE ADMIN: FALSE Message Author: <%=message.username%> Message
+        Title: <%=message.title%> Message Posted Time: <%= message.timestamp%>
+        Message: <%= message.message_text%>
+      </li>
+      <%})}else if(isMember === false && isAdmin ===
+      true){allMessages.forEach((message) =>{%>
+      <li>
+        MEMBER: FALSE ADMIN: TRUE Message Title: <%=message.title%> Message
+        Posted Time: <%= message.timestamp%> Message: <%= message.message_text%>
+      </li>
+      <%})}else if(isMember === true && isAdmin ===
+      true){allMessages.forEach((message) => {%>
+      <li>
+        MEMBER: TRUE ADMIN: TRUE Message Author: <%=message.username%> Message
+        Title: <%=message.title%> Message Posted Time: <%= message.timestamp%>
+        Message: <%= message.message_text%>
+        <form
+          action="/<%=message.message_id%>/delete"
+          method="post"
+          style="display: inline"
+        >
+          <button type="submit">Delete Message</button>
+        </form>
+      </li>
+      <%})} else{%>
+      <li>INVLAID</li>
+      <%}%>
+    </ul>
+  </body>
+</html>
